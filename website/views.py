@@ -8,8 +8,8 @@ def home():
 
 @views.route('/info')
 def info():
-    return "<h1>INFORMATION</h1>"
+    return render_template('info.html')
 
 @views.route('/analysis')
 def analysis():
-    return "<h1>ANALYSIS</h1>"
+    return render_template('analysis.html')
