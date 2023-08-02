@@ -1,5 +1,53 @@
-{% extends "base.html" %} {% block title %}Analysis Page{% endblock %}
-
-{% block content %}
-<h1>This is the Analysis Page</h1>
+{% extends "base.html" %} {% block title %}Analysis Page{% endblock %} {% block
+content %}
+<form method="POST">
+  <h3 align="center">Analysis</h3>
+  <div class="form-group">
+    <label for="symbol">Symbol</label>
+    <input
+      type="text"
+      class="form-control"
+      id="symbol"
+      name="Symbol"
+      placeholder="Enter Symbol"
+    />
+  </div>
+  <div class="form-group">
+    <label for="screener">Screener</label>
+    <input
+      type="text"
+      class="form-control"
+      id="screener"
+      name="screener"
+      placeholder="Enter screener"
+    />
+  </div>
+  <div class="form-group">
+    <label for="exchange">Exchange</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exchange"
+      name="exchange"
+      placeholder="Enter exchange"
+    />
+  </div>
+  <div class="form-group">
+    <label for="interval">Interval:</label>
+    <select id="interval" name="interval">
+      <option value="1m">1 Minute</option>
+      <option value="5m">5 Minute</option>
+      <option value="5m">15 Minute</option>
+      <option value="5m">30 Minute</option>
+      <option value="5m">1 Hour</option>
+      <option value="5m">2 Hour</option>
+      <option value="5m">4 Hour</option>
+      <option value="5m">1 Day</option>
+      <option value="5m">1 Week</option>
+      <option value="5m">1 Month</option>
+    </select>
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock %}
