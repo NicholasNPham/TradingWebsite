@@ -20,7 +20,7 @@ def register():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        if len(email) > 4:
+        if len(email) < 4:
             flash('Email must be Greater than 3 Characters.', category='error')
         elif len(firstName) < 2:
             flash('Username must be Greater than 1 Characters.', category='error')
