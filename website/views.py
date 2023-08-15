@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 from analysis import analysisForm
 
 views = Blueprint('views', __name__)
@@ -19,10 +19,11 @@ def analysis():
         exchange = str(request.form.get('exchange'))
         interval = str(request.form.get('interval'))
 
-        print(analysisForm(
-            symbol=symbol,
-            screener=screener,
-            exchange=exchange,
-            interval=interval))
+        analysis = analysisForm(symbol=symbol,
+                                screener=screener,
+                                exchange=exchange,
+                                interval=interval)
         
+        flash(analysis, category='success')
+
     return render_template('analysis.html')
