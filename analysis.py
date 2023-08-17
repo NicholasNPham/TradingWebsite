@@ -9,4 +9,3 @@ def analysisForm(symbol, screener, exchange, interval):
         interval = interval)
 
     return graph.get_analysis().summary
-
