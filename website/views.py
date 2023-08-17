@@ -18,13 +18,15 @@ def analysis():
         screener = str(request.form.get('screener'))
         exchange = str(request.form.get('exchange'))
         interval = str(request.form.get('interval'))
-        type = str(request.form.get('analysis'))
-        print(type)
+        analysisType = str(request.form.get('analysis'))
+        print(analysisType)
+        
 
         analysis = analysisForm(symbol=symbol,
                                 screener=screener,
                                 exchange=exchange,
-                                interval=interval)
+                                interval=interval,
+                                analysisType=analysisType)
         
         flash(analysis, category='success')
 
