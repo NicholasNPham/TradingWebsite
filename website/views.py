@@ -18,6 +18,8 @@ def analysis():
         screener = str(request.form.get('screener'))
         exchange = str(request.form.get('exchange'))
         interval = str(request.form.get('interval'))
+        type = str(request.form.get('analysis'))
+        print(type)
 
         analysis = analysisForm(symbol=symbol,
                                 screener=screener,
