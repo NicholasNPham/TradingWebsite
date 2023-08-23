@@ -7,11 +7,11 @@ views = Blueprint('views', __name__)
 @views.route('/')
 @login_required
 def home():
-    return render_template('home.html')
+    return render_template('home.html', user=current_user)
 
 @views.route('/info')
 def info():
-    return render_template('info.html')
+    return render_template('info.html', user=current_user)
 
 @views.route('/analysis', methods=['GET', 'POST'])
 def analysis():
@@ -32,4 +32,4 @@ def analysis():
         
         flash(analysis, category='success')
 
-    return render_template('analysis.html')
+    return render_template('analysis.html', user=current_user)
