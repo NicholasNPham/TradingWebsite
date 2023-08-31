@@ -10,7 +10,7 @@ import pandas as pd
 excelData = pd.read_excel('StockForex.xlsx')
 
 tickers = excelData['Symbol'].tolist()
-
+locations = excelData['Screener'].tolist()
 
 views = Blueprint('views', __name__)
 
@@ -27,8 +27,6 @@ def home():
              db.session.add(new_note)
              db.session.commit()
              flash('Note Added', category='success')
-        
-
 
     return render_template('home.html', user=current_user)
 
@@ -48,7 +46,9 @@ def analysis():
 
         # Checks to see if symbol is in SPX500 Stock List congruent to Excel Sheet.
         if symbol not in tickers:
-                flash('Symbol Not Found! Only S&P500 Stocks', category='error')
+            flash('Symbol Not Found! Only S&P500 Stocks', category='error')
+        elif screener not in locations: # Checks if screener is found in the Excel Sheet
+            flash('Screener Not Found. Please Try Again!') 
         else:
             analysis = analysisForm(symbol=symbol,
                                     screener=screener,
