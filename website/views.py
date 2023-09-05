@@ -11,6 +11,9 @@ import pandas as pd
 excelData = pd.read_excel('StockForex.xlsx')
 
 tickers = excelData['Symbol'].tolist()
+forexTickers = excelData['Major Pairs'].tolist()
+print(forexTickers)
+
 locations = excelData['Screener'].tolist()
 
 views = Blueprint('views', __name__)
@@ -50,25 +53,40 @@ def delete_note():
 @views.route('/analysis', methods=['GET', 'POST'])
 def analysis():
     if request.method == 'POST':
+        stockForexCrypto = str(request.form.get('stockForexCrypto').lower())
         symbol = str(request.form.get('symbol'))
         screener = str(request.form.get('screener'))
         exchange = str(request.form.get('exchange'))
         interval = str(request.form.get('interval'))
         analysisType = str(request.form.get('analysis'))
-        print(analysisType)
+        
+        print(stockForexCrypto)
 
         # Checks to see if symbol is in SPX500 Stock List congruent to Excel Sheet.
-        if symbol not in tickers:
-            flash('Symbol Not Found! Only S&P500 Stocks', category='error')
-        elif screener not in locations: # Checks if screener is found in the Excel Sheet
-            flash('Screener Not Found. Please Try Again!') 
-        else:
-            analysis = analysisForm(symbol=symbol,
-                                    screener=screener,
-                                    exchange=exchange,
-                                    interval=interval,
-                                    analysisType=analysisType)
-        
-            flash(analysis, category='success')
+        if stockForexCrypto == 'stock':
+            if symbol not in tickers:
+                flash('Symbol Not Found! Only S&P500 Stocks', category='error')
+            elif screener not in locations: # Checks if screener is found in the Excel Sheet
+                flash('Screener Not Found. Please Try Again!') 
+            else:
+                analysis = analysisForm(symbol=symbol,
+                                        screener=screener,
+                                        exchange=exchange,
+                                        interval=interval,
+                                        analysisType=analysisType)
+            
+                flash(analysis, category='success')
+        elif stockForexCrypto == "forex":
+            if symbol.upper() not in forexTickers:
+                flash('Pair Not Found! Please only use Major Pairs', category='error')
+            else:
+                analysis = analysisForm(symbol=symbol,
+                                        screener=screener,
+                                        exchange=exchange,
+                                        interval=interval,
+                                        analysisType=analysisType)
+                
+                print(analysis)
+                flash(analysis, category='success')
 
     return render_template('analysis.html', user=current_user)
