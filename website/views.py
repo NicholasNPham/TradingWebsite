@@ -76,6 +76,8 @@ def analysis():
         elif stockForexCrypto == "forex":
             if symbol.upper() not in forexTickers:
                 flash('Pair Not Found! Please only use Major Pairs', category='error')
+            elif screener != 'forex':
+                flash('Incorrect Screener. Please Use "forex" as the screener.', category='error')
             else:
                 analysis = analysisForm(symbol=symbol,
                                         screener=screener,
@@ -83,7 +85,6 @@ def analysis():
                                         interval=interval,
                                         analysisType=analysisType)
                 
-                print(analysis)
                 flash(analysis, category='success')
 
     return render_template('analysis.html', user=current_user)
