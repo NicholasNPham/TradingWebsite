@@ -12,7 +12,6 @@ excelData = pd.read_excel('StockForex.xlsx')
 
 tickers = excelData['Symbol'].tolist()
 forexTickers = excelData['Major Pairs'].tolist()
-print(forexTickers)
 
 locations = excelData['Screener'].tolist()
 
@@ -59,8 +58,6 @@ def analysis():
         exchange = str(request.form.get('exchange'))
         interval = str(request.form.get('interval'))
         analysisType = str(request.form.get('analysis'))
-        
-        print(stockForexCrypto)
 
         # Checks to see if symbol is in SPX500 Stock List congruent to Excel Sheet.
         if stockForexCrypto == 'stock':
