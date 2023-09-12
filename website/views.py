@@ -71,8 +71,20 @@ def analysis():
                                         exchange=exchange,
                                         interval=interval,
                                         analysisType=analysisType)
-            
+                
+                analysisNote = f'STOCK : {symbol} : '
+
+                for key, value in analysis.items():
+                    string = f'{key} : {value}, '
+                    analysisNote += string
+
+                newAnalysisNote = Note(data=analysisNote, user_id=current_user.id)
+                db.session.add(newAnalysisNote)
+                db.session.commit()
+
+
                 flash(analysis, category='success')
+            
         elif stockForexCrypto == "forex":
             if symbol.upper() not in forexTickers:
                 flash('Pair Not Found! Please only use Major Pairs', category='error')
