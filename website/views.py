@@ -64,7 +64,18 @@ def analysis():
             if symbol not in tickers:
                 flash('Symbol Not Found! Only S&P500 Stocks', category='error')
             elif screener not in locations: # Checks if screener is found in the Excel Sheet
-                flash('Screener Not Found. Please Try Again!') 
+                flash('Screener Not Found. Please Try Again!')
+            elif analysisType == 'Open' or 'Close' or 'Momentum' or 'RSI' or 'MACD':
+
+                analysisType = str(request.form.get('analysis'))
+
+                analysis = analysisForm(symbol=symbol,
+                                        screener=screener,
+                                        exchange=exchange,
+                                        interval=interval,
+                                        analysisType=analysisType)
+                
+                flash(f"{analysisType}: {analysis}", category='success')
             else:
                 analysis = analysisForm(symbol=symbol,
                                         screener=screener,
@@ -81,7 +92,6 @@ def analysis():
                 newAnalysisNote = Note(data=analysisNote, user_id=current_user.id)
                 db.session.add(newAnalysisNote)
                 db.session.commit()
-
 
                 flash(analysis, category='success')
             
