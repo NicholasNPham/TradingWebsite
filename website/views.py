@@ -76,6 +76,13 @@ def analysis():
                                         analysisType=analysisType)
                 
                 flash(f"{analysisType}: {analysis}", category='success')
+
+                indicatorNoteFormat = f'{analysisType}: {analysis}'
+
+                indicatorNote = Note(data=indicatorNoteFormat, user_id=current_user.id)
+                db.session.add(indicatorNote)
+                db.session.commit()
+
             else:
                 analysis = analysisForm(symbol=symbol,
                                         screener=screener,
